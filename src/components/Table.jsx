@@ -1,9 +1,6 @@
-
-
-const Table = () => {
-
+const Table = ({ tBodyData }) => {
     return (
-        <table className="table table-striped table-bordered">
+      <table className="table table-striped table-bordered" id="myTable">
         <thead className="thead-dark">
           <tr>
             <th>id</th>
@@ -12,12 +9,17 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {/* body data */}
+          {tBodyData.map((item) => (
+            <tr key={item.id}>
+              <td>{item.id}</td>
+              <td>{item.name}</td>
+              <td>{item.email}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
-      
-        )
-}
-
-
-export default Table 
+    );
+  };
+  
+  export default Table;
+  
