@@ -1,10 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const loginEmail = useRef();
     const loginPassword = useRef();
+    const navigate = useNavigate();
+
+
+
     // const connect = async (e) => {
     //     e.preventDefault();
 
@@ -74,6 +78,7 @@ const Login = () => {
     //   });
     // }
 
+
     const connect = async (e) => {
       e.preventDefault();
     
@@ -87,25 +92,43 @@ const Login = () => {
       },
       withCredentials: true
     }).then(response => {
-      console.log(response.data.data["token"]);
-      localStorage.setItem("token", response.data.data);
-
+      if(response.data.success)
+      {
+      //console.log(response.data.data["token"]);
+      localStorage.setItem("token", response.data.data["token"]);
+      navigate('/home')
+     // console.log(localStorage.getItem("token"));
+      }
+    }).catch((error) => {
+      alert("email et/ou mot de passe incorrect(s)");
+      console.log(error);
     });
     }
     
     return (
-        <div className='login-container' >
-            <div className="login">
-
-                <h3>Se connecter </h3>
-                <form onSubmit={(e) => { connect(e) }}>
-
-                    <input type="email" placeholder='email' required ref={loginEmail} />
-                    <input type="password" placeholder='mdp' required ref={loginPassword} />
-                    <input type="submit" />
-                </form>
+      <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-sm-6">
+          <div className="card">
+            <div className="card-body">
+              <h3 className="card-title">Se connecter</h3>
+              <form onSubmit={(e) => { connect(e) }}>
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input type="email" className="form-control" id="email" placeholder="Email" required ref={loginEmail} />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password">Mot de passe</label>
+                  <input type="password" className="form-control" id="password" placeholder="Mot de passe" required ref={loginPassword} />
+                </div>
+                <button type="submit" className="btn btn-primary">Se connecter</button>
+              </form>
             </div>
+          </div>
         </div>
+      </div>
+    </div>
+    
     );
 };
 
