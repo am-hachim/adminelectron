@@ -2,7 +2,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 import axios from 'axios';
 import { useState } from 'react';
 
-const Table = ({ tBodyData }) => {
+const Table = ({ tBodyData,getalluser }) => {
   const [selectedRow, setSelectedRow] = useState(null);
 
   function deleteUser(id) {
@@ -13,8 +13,11 @@ const Table = ({ tBodyData }) => {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
-      });
-      console.log(response);
+      }).then((response) => {
+        console.log(response);
+        window.location.reload();
+      })
+    
     } catch (error) {
       console.log(error);
     }
@@ -28,8 +31,10 @@ const Table = ({ tBodyData }) => {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
-      });
-      console.log(response);
+      }).then((response) => {
+        console.log(response);
+        window.location.reload();
+      })
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +70,7 @@ const Table = ({ tBodyData }) => {
             <td onClick={() => handleClick(item.id)}>
               <FaTrashAlt className={selectedRow === item.id ? 'text-danger' : ''} />
             </td>
-            <td onClick={() => makeUserAdmin(item.id)}>{item.isAdmin ? 'oui' : 'non'}</td>
+            <td onClick={() => handleClickAdmin(item.id)}>{item.isAdmin ? 'oui' : 'non'}</td>
 
           </tr>
         ))}
