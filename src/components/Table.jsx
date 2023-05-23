@@ -67,10 +67,10 @@ const Table = ({ tBodyData,getalluser }) => {
             <td>{item.id}</td>
             <td>{item.name}</td>
             <td>{item.email}</td>
-            <td onClick={() => handleClick(item.id)}>
+            <td id='delete' onClick={() => handleClick(item.id)}>
               <FaTrashAlt className={selectedRow === item.id ? 'text-danger' : ''} />
             </td>
-            <td onClick={() => handleClickAdmin(item.id)}>{item.isAdmin ? 'oui' : 'non'}</td>
+            <td id='admin' onClick={() => handleClickAdmin(item.id)}>{item.isAdmin ? 'Admin' : 'Attribuer droit admin'}</td>
 
           </tr>
         ))}
