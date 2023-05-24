@@ -2,7 +2,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 import axios from 'axios';
 import { useState } from 'react';
 
-const Table = ({ tBodyData,getalluser }) => {
+const Table = ({ tBodyData, getAllUser }) => {
   const [selectedRow, setSelectedRow] = useState(null);
 
   function deleteUser(id) {
@@ -17,7 +17,6 @@ const Table = ({ tBodyData,getalluser }) => {
         console.log(response);
         window.location.reload();
       })
-    
     } catch (error) {
       console.log(error);
     }
@@ -25,7 +24,7 @@ const Table = ({ tBodyData,getalluser }) => {
 
   function makeUserAdmin(id) {
     try {
-      const response = axios.put(`https://flexit.systems/api/makeAdmin/${id}`,null, {
+      const response = axios.put(`https://flexit.systems/api/makeAdmin/${id}`, null, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -67,11 +66,16 @@ const Table = ({ tBodyData,getalluser }) => {
             <td>{item.id}</td>
             <td>{item.name}</td>
             <td>{item.email}</td>
-            <td id='delete' onClick={() => handleClick(item.id)}>
+            <td id="delete" onClick={() => handleClick(item.id)}>
               <FaTrashAlt className={selectedRow === item.id ? 'text-danger' : ''} />
             </td>
-            <td id='admin' onClick={() => handleClickAdmin(item.id)}>{item.isAdmin ? 'Admin' : 'Attribuer droit admin'}</td>
-
+            <td
+              id="admin"
+              onClick={() => handleClickAdmin(item.id)}
+              className={item.isAdmin ? 'admin-cell' : 'not-admin-cell'}
+            >
+              {item.isAdmin ? 'Admin' : 'Attribuer droit admin'}
+            </td>
           </tr>
         ))}
       </tbody>
