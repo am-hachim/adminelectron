@@ -7,6 +7,7 @@ const Home = () => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
+  //functions to search an user by his email
   function myFunction() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById('myInput');
@@ -25,7 +26,7 @@ const Home = () => {
       }
     }
   }
-
+//Get all users
   const getAllUsers = async () => {
     try {
       const response = await axios.get('https://flexit.systems/api/getAllUsers', {
@@ -40,7 +41,7 @@ const Home = () => {
       console.log(error);
     }
   };
-
+//log out the user
   const logOut = async () => {
     try {
       const response = await axios.post('https://flexit.systems/api/logOutUser', null, {
