@@ -4,12 +4,12 @@ import Home from './pages/Home';
 import 'bootstrap/dist/css/bootstrap.css';
 
 
-import { BrowserRouter, Route, Routes,HashRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-    <HashRouter>
+    <BrowserRouter>
       <div className="container-fluid">
         <Routes>
           <Route index element={<Login />} />
@@ -17,7 +17,7 @@ function App() {
           <Route path="home" element={<Home />} />
         </Routes>
       </div>
-    </HashRouter>
+    </BrowserRouter>
   </div>
   );
 }
