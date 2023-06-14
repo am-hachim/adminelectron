@@ -92,12 +92,17 @@ const Login = () => {
       },
       withCredentials: true
     }).then(response => {
-      if(response.data.success)
+      if(response.data.success )
       {
-      //console.log(response.data.data["token"]);
+        if(response.data.data["admin"])
+        {
+      console.log(response.data.data["admin"]);
       localStorage.setItem("token", response.data.data["token"]);
       navigate('/home')
-     // console.log(localStorage.getItem("token"));
+        }else
+        {
+          alert('Seuls les admins sont autorisé');
+        }
       }
     }).catch((error) => {
       alert("email et/ou mot de passe incorrect(s)");
