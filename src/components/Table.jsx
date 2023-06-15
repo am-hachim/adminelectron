@@ -74,7 +74,7 @@ const Table = ({ tBodyData, getAllUser }) => {
               onClick={() => handleClickAdmin(item.id)}
               className={item.isAdmin ? 'admin-cell' : 'not-admin-cell'}
             >
-              {item.isAdmin ? 'Admin' : 'Attribuer droit admin'}
+              {item.isAdmin ? 'Admin' : <button className="btn btn-primary mb-3">Attribuer droit admin</button>}
             </td>
           </tr>
         ))}

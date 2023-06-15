@@ -11,6 +11,9 @@
 # production
 /build
 
+#adminelectron
+/adminelectron-win32-x64
+
 # misc
 .DS_Store
 .env.local

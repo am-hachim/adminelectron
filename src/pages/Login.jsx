@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
@@ -8,75 +8,6 @@ const Login = () => {
     const navigate = useNavigate();
 
 
-
-    // const connect = async (e) => {
-    //     e.preventDefault();
-
-    //     const ttruc = axios.get('https://flexit.systems/sanctum/csrf-cookie');
-
-    //     const res = await fetch("https://flexit.systems/api/postConnection", {
-    //       method: "POST",
-    //       headers: {
-    //         Accept: "application/json",
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //         email: loginEmail.current.value,
-    //         password: loginPassword.current.value,
-    //       }),
-    //     })
-    //       .then((res) => res.json())
-    //       .then((truc) => {
-    //         console.log(ttruc);
-    //         if (truc.success) {
-    //           console.log(truc);
-    //           return truc["success"];
-    //         } else {
-    //           return truc["success"];
-    //         }
-    //       })
-    //       .catch((error) => {
-    //         return error;
-    //       });
-    //     console.log({ res });
-    //     return res;
-    // }
-
-    // const connect = async (e) => {
-    //   e.preventDefault();
-    
-    //   axios.get('https://flexit.systems/sanctum/csrf-cookie').then(response => {
-    //     try {
-    //       const csrfToken = document.cookie
-    //         ? document.cookie
-    //             .split(';')
-    //             .find(cookie => cookie.trim().startsWith('XSRF-TOKEN='))
-    //         : null;
-    
-    //       if (!csrfToken) {
-    //         throw new Error('CSRF token not found.');
-    //       }
-    
-    //       const res = axios.post("https://flexit.system/api/postConnection", {
-    //         email: loginEmail.current.value,
-    //         password: loginPassword.current.value,
-    //       }, {
-    //         headers: {
-    //           'X-CSRF-TOKEN': csrfToken,
-    //           'Accept': 'application/json',
-    //           'Content-Type': 'application/json'
-    //         },
-    //         withCredentials: true
-    //       });
-    
-    //       console.log(res.data);
-    //       return res.data.success;
-    //     } catch (error) {
-    //       console.log(error);
-    //       return error;
-    //     }
-    //   });
-    // }
 
 
     const connect = async (e) => {
@@ -92,12 +23,17 @@ const Login = () => {
       },
       withCredentials: true
     }).then(response => {
-      if(response.data.success)
+      if(response.data.success )
       {
-      //console.log(response.data.data["token"]);
+        if(response.data.data["admin"])
+        {
+      console.log(response.data.data["admin"]);
       localStorage.setItem("token", response.data.data["token"]);
       navigate('/home')
-     // console.log(localStorage.getItem("token"));
+        }else
+        {
+          alert('Seuls les admins sont autorisé');
+        }
       }
     }).catch((error) => {
       alert("email et/ou mot de passe incorrect(s)");
